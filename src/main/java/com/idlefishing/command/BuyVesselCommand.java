@@ -5,7 +5,6 @@ import com.idlefishing.model.vessel.Vessel;
 import com.idlefishing.observer.EventBus;
 import com.idlefishing.observer.EventType;
 
-
 public class BuyVesselCommand implements Command {
 
     private final GameState state;
@@ -31,6 +30,6 @@ public class BuyVesselCommand implements Command {
 
     @Override
     public String getDescription() {
-        return "Buy " + vessel.getName() + " for €" + String.format("%.2f", vessel.getCurrentCost());
+        return "Buy " + vessel.getName();
     }
 }

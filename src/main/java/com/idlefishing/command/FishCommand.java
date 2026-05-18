@@ -7,16 +7,13 @@ import com.idlefishing.observer.EventBus;
 import com.idlefishing.observer.EventType;
 import java.util.Random;
 
-/**
- * Command: player manually clicks to catch a fish at the current spot.
- * Value has ±25 % variance to keep clicking interesting.
- */
+/** Manual click-to-fish action. Value has ±25% variance so each cast feels different. */
 public class FishCommand implements Command {
 
     private static final Random RANDOM = new Random();
 
     private final GameState state;
-    private Fish lastCatch;
+    private Fish   lastCatch;
     private double lastValue;
 
     public FishCommand(GameState state) {
@@ -31,7 +28,7 @@ public class FishCommand implements Command {
         Fish fish = spot.catchFish();
         if (fish == null) return false;
 
-        double variance = 0.75 + RANDOM.nextDouble() * 0.50; // 0.75 – 1.25
+        double variance = 0.75 + RANDOM.nextDouble() * 0.50;
         double value    = fish.calculateValue(state.getMarketMultiplier(), variance)
                           * state.getPrestigeBonus();
 
@@ -51,6 +48,6 @@ public class FishCommand implements Command {
         return "Fish at " + state.getCurrentSpot().getName();
     }
 
-    public Fish getLastCatch() { return lastCatch; }
+    public Fish   getLastCatch() { return lastCatch; }
     public double getLastValue() { return lastValue; }
 }

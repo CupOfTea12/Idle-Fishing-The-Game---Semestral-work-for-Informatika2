@@ -4,16 +4,9 @@ import java.awt.*;
 import java.awt.geom.*;
 
 /**
- * Static utility that draws every vessel type using Java2D.
- *
- * <p>All drawing methods work in an internal coordinate space where the
- * hull's bottom centre sits at <b>(46, 52)</b> on a 92 × 70 canvas.
- * Callers use {@link #draw} which applies a translate+scale transform so the
- * boat appears at the requested scene position and scale without duplicating
- * coordinate maths.
- *
- * <p>Both {@link VesselIconPanel} (shop thumbnails) and
- * {@link FishingPanel} (live ocean scene) delegate here.
+ * Draws all four vessel types with Java2D.
+ * Internal canvas is 92×70, waterline at y=52, hull centre at x=46.
+ * Use {@link #draw} to place a boat anywhere in the scene at any scale.
  */
 public final class VesselPainter {
 
@@ -28,15 +21,8 @@ public final class VesselPainter {
     // ── Public entry point ────────────────────────────────────────────────────
 
     /**
-     * Draws a vessel so its hull's bottom-centre lands at
-     * ({@code cx}, {@code waterlineY + bobY}).
-     *
-     * @param g2          target graphics context (not modified; a copy is used)
-     * @param vesselName  "Rowboat", "Fishing Boat", "Trawler", or "Factory Ship"
-     * @param cx          scene X of the hull centre
-     * @param waterlineY  scene Y of the water surface
-     * @param scale       uniform scale (1.0 = natural shop-icon size)
-     * @param bobY        vertical bob offset from wave animation (pixels, pre-scale)
+     * Draws a vessel with its hull bottom-centre at (cx, waterlineY + bobY).
+     * bobY comes from the wave animation — pass 0 for a static drawing.
      */
     public static void draw(Graphics2D g2, String vesselName,
                             int cx, int waterlineY, double scale, double bobY) {

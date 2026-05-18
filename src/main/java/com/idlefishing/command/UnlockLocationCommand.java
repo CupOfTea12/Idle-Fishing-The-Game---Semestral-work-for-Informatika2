@@ -5,7 +5,6 @@ import com.idlefishing.model.spot.FishingSpot;
 import com.idlefishing.observer.EventBus;
 import com.idlefishing.observer.EventType;
 
-/** Command: pay to unlock a fishing location and switch to it. */
 public class UnlockLocationCommand implements Command {
 
     private final GameState state;
@@ -21,7 +20,6 @@ public class UnlockLocationCommand implements Command {
     @Override
     public boolean execute() {
         if (spot.isUnlocked()) {
-            // Just switch to this spot
             state.setCurrentSpotIndex(spotIndex);
             EventBus.getInstance().publish(EventType.LOCATION_CHANGED, spotIndex);
             return true;
@@ -42,6 +40,6 @@ public class UnlockLocationCommand implements Command {
     public String getDescription() {
         return spot.isUnlocked()
                ? "Switch to " + spot.getName()
-               : "Unlock " + spot.getName() + " for €" + String.format("%,.0f", spot.getUnlockCost());
+               : "Unlock " + spot.getName();
     }
 }

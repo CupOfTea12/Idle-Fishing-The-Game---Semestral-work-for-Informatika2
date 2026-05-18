@@ -5,7 +5,6 @@ import com.idlefishing.observer.EventBus;
 import com.idlefishing.observer.EventType;
 import com.idlefishing.util.GameConstants;
 
-/** Command: trigger prestige reset once the player reaches €1 000 000. */
 public class PrestigeCommand implements Command {
 
     private final GameState state;
@@ -17,7 +16,6 @@ public class PrestigeCommand implements Command {
     @Override
     public boolean execute() {
         if (state.getMoney() < GameConstants.PRESTIGE_THRESHOLD) return false;
-
         state.prestige();
         EventBus.getInstance().publish(EventType.PRESTIGE_TRIGGERED, state.getPrestigeLevel());
         return true;

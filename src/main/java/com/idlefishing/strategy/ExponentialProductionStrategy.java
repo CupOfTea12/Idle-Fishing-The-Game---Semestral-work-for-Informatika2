@@ -1,15 +1,9 @@
 package com.idlefishing.strategy;
 
-/**
- * Exponential bonus growth: {@code rate = baseRate * count * 1.05^(count-1)}.
- * Factory Ships scale aggressively the more you own.
- */
+/** Factory ships snowball hard — the more you own, the faster each one produces. */
 public class ExponentialProductionStrategy implements ProductionStrategy {
-
-    private static final double SCALE = 1.05;
-
     @Override
     public double calculate(double baseRate, int count) {
-        return baseRate * count * Math.pow(SCALE, count - 1);
+        return baseRate * count * Math.pow(1.05, count - 1);
     }
 }
